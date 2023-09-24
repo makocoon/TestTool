@@ -10,6 +10,7 @@ namespace TestTool
         {
             try
             {
+                //検索したワードを入力してもらう
                 string? keyword = Console.ReadLine();
                 SearchDirectory _fileSearcher = new SearchDirectory(keyword);
             }

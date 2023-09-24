@@ -17,14 +17,17 @@ namespace TestTool
 
         public SearchDirectory(string keyword)
         {
-            foreach(var item in _listDirectory._allPathList)
+            foreach (var item in _listDirectory._allPathList)
             {
-                if(item.Contains(keyword))
+                if (item.Contains(keyword))
                 {
                     _foundPathList.Add(item);
                 }
             }
-            Console.WriteLine(_foundPathList);
+            foreach (var item in _foundPathList)
+            {
+                Console.WriteLine(item);
+            }
         }
 
     }

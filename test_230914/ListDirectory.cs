@@ -24,14 +24,19 @@ namespace TestTool
         private void CreatePathList(string path)
         {
             var parentPath = new DirectoryInfo(path);
-            _allPathList.Add(parentPath.FullName);
+            //_allPathList.Add(parentPath.FullName);
             try
             {
                 foreach (var childPath in parentPath.GetDirectories())
                 {
                     _allPathList.Add(childPath.FullName);
-                    //Console.WriteLine(i.FullName);
                     CreatePathList(childPath.FullName);
+                    Console.WriteLine(childPath.FullName);
+                }
+                //デバッグ用
+                foreach (var item in _allPathList)
+                {
+                    Console.WriteLine(item);
                 }
             }
             catch (Exception ex)
