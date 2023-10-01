@@ -11,38 +11,64 @@ namespace TestTool
     //PC上にあるディレクトリのパスをリスト化する
     internal class ListDirectory
     {
+        //追加したディレクトリのパスリスト
         public List<string> _allPathList = new List<string>();
+        //検索キーワードを含むディレクトリのパスリスト
+        public List<string> _foundPathList = new List<string>();
+
         public ListDirectory()
         {
-            CreatePathList(@"C:\");
         }
-        //foreach (var item in PathList)
-        //{
-        //    Console.WriteLine(item);
-        //}
-
-        private void CreatePathList(string path)
+        public void CreatePathList(string path)
         {
-            var parentPath = new DirectoryInfo(path);
-            //_allPathList.Add(parentPath.FullName);
-            try
+            _allPathList.Add(path);
+        }
+        //デバッグ用
+        public void ShowAllPathList()
+        {
+            foreach (var item in _allPathList)
             {
-                foreach (var childPath in parentPath.GetDirectories())
+                Console.WriteLine(item);
+            }
+        }
+        public void SearchDirectory(string keyword)
+        {
+            foreach (var item in _allPathList)
+            {
+                if (item.Contains(keyword, StringComparison.OrdinalIgnoreCase))
                 {
-                    _allPathList.Add(childPath.FullName);
-                    CreatePathList(childPath.FullName);
-                    Console.WriteLine(childPath.FullName);
+                    _foundPathList.Add(item);
                 }
-                //デバッグ用
-                foreach (var item in _allPathList)
+            }
+            if (_foundPathList.Count > 0)
+            {
+                foreach (var item in _foundPathList)
                 {
                     Console.WriteLine(item);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine("エラー：" + ex.Message);
+                Console.WriteLine("一致なし");
             }
         }
     }
 }
+//{
+//    var parentPath = new DirectoryInfo(path);
+//    //_allPathList.Add(parentPath.FullName);
+//    try
+//    {
+//        foreach (var childPath in parentPath.GetDirectories())
+//        {
+//            _allPathList.Add(childPath.FullName);
+//            //CreatePathList(childPath.FullName);
+//            //Console.WriteLine(childPath.FullName);
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine("エラー：" + ex.Message);
+//    }
+//}
+
